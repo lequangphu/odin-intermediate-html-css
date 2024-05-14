@@ -1,0 +1,46 @@
+body {
+  background-color: #fff;
+  color: #333;
+  font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+  padding: 1em;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0; margin: 0;
+}
+
+input[type='radio'] {
+  appearance: none;
+  border: 2px solid black;
+  background-color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: relative;
+}
+
+input[type='radio']:checked::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+input[type='radio'],
+label {
+  vertical-align: middle;
+}
