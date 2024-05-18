@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Form validation: Task 3</title>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 1em;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form>
+      <label for="mail">I would like you to provide me with an e-mail address:</label>
+      <input type="email" id="mail" name="mail" required minlength="10">
+      <button>Submit</button>
+    </form>
+  </body>
+  <script>
+    const email = document.getElementById("mail");
+    
+    // Email pattern explanation:
+    // ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+    // ^ asserts position at the start of the string
+    // [a-zA-Z0-9._%+-]+ matches one or more of the allowed characters before the @ symbol
+    // @ matches the @ symbol
+    // [a-zA-Z0-9.-]+ matches one or more of the allowed characters for the domain
+    // \. matches the dot before the domain extension
+    // [a-zA-Z]{2,} matches at least two alphabetic characters for the domain extension
+    // $ asserts position at the end of the string
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    const errorPopup = document.createElement('div');
+    errorPopup.style.position = 'absolute';
+    errorPopup.style.backgroundColor = '#f8d7da';
+    errorPopup.style.color = '#721c24';
+    errorPopup.style.border = '1px solid #f5c6cb';
+    errorPopup.style.padding = '5px';
+    errorPopup.style.borderRadius = '3px';
+    errorPopup.style.display = 'none';
+    document.body.appendChild(errorPopup);
+
+    email.addEventListener('input', function() {
+      const rect = email.getBoundingClientRect();
+      errorPopup.style.top = `${rect.bottom + window.scrollY}px`;
+      errorPopup.style.left = `${rect.left + window.scrollX}px`;
+
+      if (email.value.length >= 10 && emailPattern.test(email.value)) {
+        console.log("Valid email address");
+        errorPopup.style.display = 'none';
+      } else {
+        errorPopup.textContent = "Invalid email address. Please ensure it is at least 10 characters long and matches the email pattern.";
+        errorPopup.style.display = 'block';
+      }
+    });
+
+
+  </script>
+
+</html>
